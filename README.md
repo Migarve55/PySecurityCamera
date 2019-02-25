@@ -1,12 +1,25 @@
 # PySecurityCamera
-Python based security camera
+Python based security camera.
 This project can run in any platform, although it is best suited for a Raspberry Pi.
 
-##Features
+## Install
+
+```
+  sudo pip install Flask
+  sudo pip install python-cv2 
+```
+
+## Run
+
+```
+  sudo python app.py
+```
+
+## Features
 
   - MJPEG Stream WebServer
 
-##Future features
+## Future features
 
   - Security login
   - Configuration file
