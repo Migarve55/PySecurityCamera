@@ -9,6 +9,12 @@ This project can run in any platform, although it is best suited for a Raspberry
   sudo pip install python-cv2 
 ```
 
+## Setup
+
+If you want, you can change the default username and password.
+Go to the app.py file and change it there.
+This is a basic security measure, and I highly recomend you to do it.
+
 ## Run
 
 ```
@@ -18,11 +24,11 @@ This project can run in any platform, although it is best suited for a Raspberry
 ## Features
 
   - MJPEG Stream WebServer
+  - Security login
 
 ## Future features
 
-  - Security login
   - Configuration file
-  - Configuration by webServerForm
+  - Change the configuration on the fly
   - Screenshot saving
   - Pan/Tilt servomotors functionality (Only for RaspberryPi)

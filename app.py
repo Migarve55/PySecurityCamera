@@ -9,6 +9,9 @@ from camera_opencv import Camera
 app = Flask(__name__)
 app.secret_key = b'T7fy2T"F4Q8zGHac9Y'
 
+# Settings
+
+user = "admin"
 password = "1234"
 
 # Web controls
@@ -16,13 +19,15 @@ password = "1234"
 
 @app.route('/')
 def index():
+    if not session['LOGGED']:
+        return redirect(url_for('login'))
     return render_template('index.html')
 
 
 @app.route('/settings')
 def settings():
     if not session['LOGGED']:
-        abort(403)
+        return redirect(url_for('login'))
     return render_template('settings.html')
 
 # Login
@@ -31,7 +36,7 @@ def settings():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == "POST":
-        if password == request.args.get('password'):
+        if password == request.args.get('password') and user == request.args.get('username'):
             session['LOGGED'] = True
             return redirect(url_for('index'))
     return render_template('login.html')
@@ -40,7 +45,7 @@ def login():
 @app.route('/logout')
 def login():
     session['LOGGED'] = False
-    return redirect(url_for('index'))
+    return redirect(url_for('login'))
 
 # Camera
 
