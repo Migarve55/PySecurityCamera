@@ -1,39 +1,61 @@
 #!/usr/bin/env python
-from importlib import import_module
-import os
-from flask import Flask, render_template, Response
+from flask import Flask, render_template, session, Response, abort, url_for, redirect, request
 
-# import camera driver
-if os.environ.get('CAMERA'):
-    Camera = import_module('camera_' + os.environ['CAMERA']).Camera
-else:
-    from camera_opencv import Camera
+from camera_opencv import Camera
 
 # Raspberry Pi camera module (requires picamera package)
 # from camera_pi import Camera
 
 app = Flask(__name__)
+app.secret_key = b'T7fy2T"F4Q8zGHac9Y'
+
+password = "1234"
+
+# Web controls
 
 
 @app.route('/')
 def index():
-    """Video streaming home page."""
     return render_template('index.html')
 
 
+@app.route('/settings')
+def settings():
+    if not session['LOGGED']:
+        abort(403)
+    return render_template('settings.html')
+
+# Login
+
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == "POST":
+        if password == request.args.get('password'):
+            session['LOGGED'] = True
+            return redirect(url_for('index'))
+    return render_template('login.html')
+
+
+@app.route('/logout')
+def login():
+    session['LOGGED'] = False
+    return redirect(url_for('index'))
+
+# Camera
+
+
+@app.route('/feed')
+def feed():
+    if not session['LOGGED']:
+        abort(403)
+    return Response(gen(Camera()), mimetype='multipart/x-mixed-replace; boundary=frame')
+
+
 def gen(camera):
-    """Video streaming generator function."""
     while True:
         frame = camera.get_frame()
-        yield (b'--frame\r\n'
-               b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
-
-
-@app.route('/video_feed')
-def video_feed():
-    """Video streaming route. Put this in the src attribute of an img tag."""
-    return Response(gen(Camera()),
-                    mimetype='multipart/x-mixed-replace; boundary=frame')
+        yield (b'--frame\r\n')
 
 
 if __name__ == '__main__':

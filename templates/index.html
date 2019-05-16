@@ -1,9 +1,50 @@
-<html>
-  <head>
-    <title>Video Streaming Demonstration</title>
-  </head>
-  <body>
-    <h1>Video Streaming Demonstration</h1>
-    <img src="{{ url_for('video_feed') }}">
-  </body>
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+   <title>Camera control</title>
+   <meta charset="utf-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" type="text/css" media="screen" href="{{url_for('static', filename='style.css')}}">
+   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+   <script src="{{url_for('static', filename='control.js')}}"></script>
+</head>
+
+<body onload="load();">
+	<header>
+		<h1>Home security camera controls</h1>
+	</header>
+    <main>
+		<section>
+			<h1>Camera:</h1>
+			<div class="camera">
+				<div class="cameraBtn" onclick="turnYleft();"><i class="fas fa-angle-left"></i></div>
+				<div class="feed">
+					<img src="{{ url_for('feed') }}"/>
+				</div>
+				<div class="cameraBtn" onclick="turnYright();"><i class="fas fa-angle-right"></i></div>
+			</div>
+			<p>Status: <span id="status">Idle</span></p>
+	    </section>
+	    <section>
+			<h1>Control:</h1>
+			<p>Degrees of Y axis: <span id="x"></span></p>
+			<div class="control">
+				<span>Move the camera:</span> 
+				<button type="button" onclick="turnYleft();">Turn left</button>  
+				<button type="button" onclick="turnYright();">Turn right</button>
+			</div>
+	    </section>
+		<section>
+			<h1>Text to speech:</h1>
+			<div class="control">
+				<span>Text:</span> 
+				<input type="text" id="msg">
+				<button type="button" onclick="sendText();">Talk</button> 
+			</div>
+		</section>
+	</main>
+</body>
 </html>
