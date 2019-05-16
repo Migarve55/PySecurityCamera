@@ -19,14 +19,14 @@ password = "1234"
 
 @app.route('/')
 def index():
-    if not session['LOGGED']:
+    if not getLogged():
         return redirect(url_for('login'))
     return render_template('index.html')
 
 
 @app.route('/settings')
 def settings():
-    if not session['LOGGED']:
+    if not getLogged():
         return redirect(url_for('login'))
     return render_template('settings.html')
 
@@ -36,14 +36,14 @@ def settings():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == "POST":
-        if password == request.args.get('password') and user == request.args.get('username'):
+        if password == request.form.get('password') and user == request.form.get('username'):
             session['LOGGED'] = True
             return redirect(url_for('index'))
     return render_template('login.html')
 
 
 @app.route('/logout')
-def login():
+def logout():
     session['LOGGED'] = False
     return redirect(url_for('login'))
 
@@ -52,7 +52,7 @@ def login():
 
 @app.route('/feed')
 def feed():
-    if not session['LOGGED']:
+    if not getLogged():
         abort(403)
     return Response(gen(Camera()), mimetype='multipart/x-mixed-replace; boundary=frame')
 
@@ -60,8 +60,17 @@ def feed():
 def gen(camera):
     while True:
         frame = camera.get_frame()
-        yield (b'--frame\r\n')
+        yield (b'--frame\r\n'
+               b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
 
+
+# Auxiliar
+
+def getLogged():
+    try:
+        return session['LOGGED']
+    except:
+        return False
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', threaded=True)

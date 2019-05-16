@@ -5,6 +5,25 @@ body {
 	background-image: url("https://www.transparenttextures.com/patterns/brushed-alum.png");
 }
 
+nav ul {
+	display: flex;
+	padding: 0px;
+}
+
+nav li {
+	margin: 0.2em;
+	padding: 0.1em;
+	list-style: none;
+}
+
+nav li a {
+	color: black;
+}
+
+nav li a:hover {
+	font-weight: bold;
+}
+
 li {
     list-style-type: square;
 }
@@ -64,4 +83,16 @@ section {
 .control {
 	padding: 0.2em;
 	margin: 0.5em;
+}
+
+.formWrapper {
+	width: 20em;
+	padding: 1.2em;
+	border-radius: 15px;
+	background: #06060654;
+}
+
+.formControl {
+	margin: 0.2em;
+	padding: 0.4em;
 }

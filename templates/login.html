@@ -16,12 +16,20 @@
 		<h1>Login</h1>
 	</header>
     <main>
-		<form action="/login" method="POST">
-            <label for="username">Username:</label>
-            <input type="text" name="username">
-            <label for="password">Password</label>
-            <input type="password" name="password">
-            <input type="submit">Login</input>
-        </form>
+        <div class="formWrapper">
+            <form action="/login" method="POST">
+                <div class="formControl">
+                    <label for="username">Username:</label>
+                    <input type="text" name="username">
+                </div>
+                <div class="formControl">
+                    <label for="password">Password:</label>
+                    <input type="password" name="password">
+                </div>
+                <div class="formControl">
+                    <input type="submit">
+                </div>
+            </form>
+        </div>
 </body>
 </html>
