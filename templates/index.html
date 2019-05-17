@@ -2,61 +2,63 @@
 <html lang="es">
 
 <head>
-   <title>Camera control</title>
-   <meta charset="utf-8">
-   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-   <meta name="viewport" content="width=device-width, initial-scale=1">
-   <link rel="stylesheet" type="text/css" media="screen" href="{{url_for('static', filename='style.css')}}">
-   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
-   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-   <script src="{{url_for('static', filename='control.js')}}"></script>
+    <title>Camera control</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="{{url_for('static', filename='style.css')}}">
+    <link rel="stylesheet" type="text/css" media="screen" href="{{url_for('static', filename='camera.css')}}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="{{url_for('static', filename='control.js')}}"></script>
 </head>
 
 <body onload="load();">
-	<header>
-		<h1>Home security camera controls</h1>
-	</header>
-		<nav>
-			<ul>
-				<li><a href="{{ url_for('settings') }}">Settings</a></li>
-				<li><a href="{{ url_for('logout') }}">Log out</a></li>
-			</ul>
-		</nav>
+    <header>
+        <h1>Home security camera controls</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="{{ url_for('settings') }}">Settings</a></li>
+            <li><a href="{{ url_for('logout') }}">Log out</a></li>
+        </ul>
+    </nav>
     <main>
-		<section>
-			<h1>Camera:</h1>
-			<div class="camera">
-				<img class="feed" src="{{ url_for('feed') }}"/>
-				<div class="cameraBtn up" onclick="turnYleft();"><i class="fas fa-angle-up"></i></div>
-				<div class="cameraBtn down" onclick="turnYright();"><i class="fas fa-angle-down"></i></div>
-				<div class="cameraBtn left" onclick="turnXleft();"><i class="fas fa-angle-left"></i></div>
-				<div class="cameraBtn right" onclick="turnXright();"><i class="fas fa-angle-right"></i></div>
-			</div>
-			<p>Status: <span id="status">Idle</span></p>
-	  </section>
-	  <section>
-			<h1>Control:</h1>
-			<p>Degrees of X axis: <span id="x"></span></p>
-			<p>Degrees of Y axis: <span id="y"></span></p>
-			<div class="control">
-				<span>Pan:</span> 
-				<button type="button" onclick="turnXleft();">Turn left</button>  
-				<button type="button" onclick="turnXright();">Turn right</button>
-			</div>
-			<div class="control">
-				<span>Tilt:</span> 
-				<button type="button" onclick="turnYleft();">Go up</button>  
-				<button type="button" onclick="turnYright();">Go down</button>
-			</div>
-	  </section>
-		<section>
-			<h1>Text to speech:</h1>
-			<div class="control">
-				<span>Text:</span> 
-				<input type="text" id="msg">
-				<button type="button" onclick="sendText();">Talk</button> 
-			</div>
-		</section>
-	</main>
+        <section>
+            <h1>Camera:</h1>
+            <div class="camera">
+                <img class="feed" src="{{ url_for('feed') }}" />
+                <div class="cameraBtn up" onclick="turnYleft();"><i class="fas fa-angle-up"></i></div>
+                <div class="cameraBtn down" onclick="turnYright();"><i class="fas fa-angle-down"></i></div>
+                <div class="cameraBtn left" onclick="turnXleft();"><i class="fas fa-angle-left"></i></div>
+                <div class="cameraBtn right" onclick="turnXright();"><i class="fas fa-angle-right"></i></div>
+            </div>
+            <p>Status: <span id="status">Idle</span></p>
+        </section>
+        <section>
+            <h1>Control:</h1>
+            <p>Degrees of X axis: <span id="x"></span></p>
+            <p>Degrees of Y axis: <span id="y"></span></p>
+            <div class="control">
+                <span>Pan:</span>
+                <button type="button" onclick="turnXleft();">Turn left</button>
+                <button type="button" onclick="turnXright();">Turn right</button>
+            </div>
+            <div class="control">
+                <span>Tilt:</span>
+                <button type="button" onclick="turnYleft();">Go up</button>
+                <button type="button" onclick="turnYright();">Go down</button>
+            </div>
+        </section>
+        <section>
+            <h1>Text to speech:</h1>
+            <div class="control">
+                <span>Text:</span>
+                <input type="text" id="msg">
+                <button type="button" onclick="sendText();">Talk</button>
+            </div>
+        </section>
+    </main>
 </body>
+
 </html>

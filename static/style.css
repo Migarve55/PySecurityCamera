@@ -1,27 +1,27 @@
 body {
-	margin: 1em;
+    margin: 1em;
     font-family: "Lucida Console", Monaco, monospace;
-	background-color: #706767;
-	background-image: url("https://www.transparenttextures.com/patterns/brushed-alum.png");
+    background-color: #706767;
+    background-image: url("https://www.transparenttextures.com/patterns/brushed-alum.png");
 }
 
 nav ul {
-	display: flex;
-	padding: 0px;
+    display: flex;
+    padding: 0px;
 }
 
 nav li {
-	margin: 0.2em;
-	padding: 0.1em;
-	list-style: none;
+    margin: 0.2em;
+    padding: 0.1em;
+    list-style: none;
 }
 
 nav li a {
-	color: black;
+    color: black;
 }
 
 nav li a:hover {
-	font-weight: bold;
+    font-weight: bold;
 }
 
 li {
@@ -29,46 +29,45 @@ li {
 }
 
 section {
-	padding: 0.4em;
-	margin: 0.6em;
-	border-radius: 15px;
-	background: #06060654;
-	overflow-x: auto;
+    padding: 0.4em;
+    margin: 0.6em;
+    border-radius: 15px;
+    background: #06060654;
+    overflow-x: auto;
 }
 
 .camera {
-	position: relative;
-	margin: 0.8em;
-	width: 50vw;
+    position: relative;
+    margin: 0.8em;
     margin-left: auto;
     margin-right: auto;
 }
 
 .cameraBtn {
-	position: absolute;
+    position: absolute;
     text-align: center;
-	background: #3535346e;
-	display: flex;
+    background: #3535346e;
+    display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.cameraBtn > i {
-	font-size: 4em;
+.cameraBtn>i {
+    font-size: 4em;
 }
 
 .cameraBtn:hover {
-	transition: 0.2s;
-	background: #10101082;
+    transition: 0.2s;
+    background: #10101082;
 }
 
 .cameraBtn:active {
-	transition: 0.2s;
-	background: #060606b5;
+    transition: 0.2s;
+    background: #060606b5;
 }
 
 .up {
-	top: 0px;
+    top: 0px;
     right: calc(50% - 2.5em);
     width: 5em;
     height: 2.5em;
@@ -76,7 +75,7 @@ section {
 }
 
 .down {
-	bottom:0px;
+    bottom: 0px;
     right: calc(50% - 2.5em);
     width: 5em;
     height: 2.5em;
@@ -84,7 +83,7 @@ section {
 }
 
 .left {
-	bottom: calc(50% - 2.5em);
+    bottom: calc(50% - 2.5em);
     left: 0px;
     width: 2.5em;
     height: 5em;
@@ -92,7 +91,7 @@ section {
 }
 
 .right {
-	bottom: calc(50% - 2.5em);
+    bottom: calc(50% - 2.5em);
     right: 0px;
     width: 2.5em;
     height: 5em;
@@ -100,27 +99,27 @@ section {
 }
 
 .feed {
-	width: 100%;
+    width: 100%;
 }
 
 .control {
-	padding: 0.2em;
-	margin: 0.5em;
+    padding: 0.2em;
+    margin: 0.5em;
 }
 
 .formWrapper {
-	width: 20em;
-	padding: 1.2em;
-	border-radius: 15px;
-	background: #06060654;
+    width: 20em;
+    padding: 1.2em;
+    border-radius: 15px;
+    background: #06060654;
 }
 
 .formControl {
-	margin: 0.2em;
-	padding: 0.4em;
+    margin: 0.2em;
+    padding: 0.4em;
 }
 
 .alert {
-	font-weight: bold;
-	color: red;
+    font-weight: bold;
+    color: red;
 }
