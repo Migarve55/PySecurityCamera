@@ -20,7 +20,7 @@ password = "1234"
 with open('config.json') as configFile:
     config = json.load(configFile)
     user = config["security"]["username"]
-    password = config["security"]["username"]
+    password = config["security"]["password"]
 
 # Web controls
 
