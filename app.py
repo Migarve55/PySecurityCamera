@@ -83,6 +83,7 @@ def say():
 	msg = request.json['msg']
 	if msg != None:
 		piControl.say(msg)
+        return "ok"
 	else:
 		abort(400)
 

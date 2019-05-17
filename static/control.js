@@ -5,27 +5,39 @@ function load() {
 	output.innerHTML = 90;
 }
 
+function setError() {
+  $("#status").html('<span class="alert">Error</span>');
+}
+
 function turnXright() {
   $.get("/servo/servoX/right", function(response) {
     $("#x").html(response);
+  }).fail(function() {
+    setError();
   });
 }
 
 function turnXleft() {
   $.get("/servo/servoX/left", function(response) {
     $("#x").html(response);
+  }).fail(function() {
+    setError();
   });
 }
 
 function turnYright() {
   $.get("/servo/servoY/right", function(response) {
     $("#y").html(response);
+  }).fail(function() {
+    setError();
   });
 }
 
 function turnYleft() {
   $.get("/servo/servoY/left", function(response) {
     $("#y").html(response);
+  }).fail(function() {
+    setError();
   });
 }
 
@@ -41,6 +53,6 @@ function sendText() {
   }).done(function(response) {
     $("#status").html(response);
 	}).fail(function() {
-    $("#status").html('<span class="alert">Error</span>');
+    setError();
   });
 }

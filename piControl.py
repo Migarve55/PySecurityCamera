@@ -100,5 +100,8 @@ def changeServoPos(servo, action):
 
 
 def say(msg):
-	engine.say(msg)
-	engine.runAndWait()
+    try:
+        engine.say(msg)
+        engine.runAndWait()
+    except:
+        print("Could not t2s")
