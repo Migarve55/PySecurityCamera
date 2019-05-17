@@ -37,8 +37,8 @@ section {
 }
 
 .camera {
-	display: flex;
-	justify-content: center;
+	position:relative;
+	margin: 0.5em;
 }
 
 .cameraBtn {
@@ -97,8 +97,6 @@ section {
 }
 
 .feed {
-	display: block;
-	margin: 0.3em;
 	width: 80%;
 }
 

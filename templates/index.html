@@ -26,9 +26,7 @@
 		<section>
 			<h1>Camera:</h1>
 			<div class="camera">
-				<div class="feed">
-					<img src="{{ url_for('feed') }}"/>
-				</div>
+				<img class="feed" src="{{ url_for('feed') }}"/>
 				<div class="cameraBtn up" onclick="turnYleft();"><i class="fas fa-angle-up"></i></div>
 				<div class="cameraBtn down" onclick="turnYright();"><i class="fas fa-angle-down"></i></div>
 				<div class="cameraBtn left" onclick="turnXleft();"><i class="fas fa-angle-left"></i></div>
