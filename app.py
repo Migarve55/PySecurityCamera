@@ -78,14 +78,15 @@ def gen(camera):
 def changeServoPos(servo, action):
     return piControl.changeServoPos(servo, action)
 
+
 @app.route('/say', methods=['POST'])
 def say():
-	msg = request.json['msg']
-	if msg != None:
-		piControl.say(msg)
+    msg = request.json['msg']
+    if msg != None:
+        piControl.say(msg)
         return "ok"
-	else:
-		abort(400)
+    else:
+        abort(400)
 
 # Auxiliar
 
