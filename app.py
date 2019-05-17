@@ -78,14 +78,14 @@ def gen(camera):
 def getServoPos(servo):
     if not getLogged():
         abort(403)
-    return piControl.getServoPos(servo)
+    return str(piControl.getServoPos(servo))
 
 
 @app.route("/move/<servo>/<action>")
 def changeServoPos(servo, action):
     if not getLogged():
         abort(403)
-    return piControl.changeServoPos(servo, action)
+    return str(piControl.changeServoPos(servo, action))
 
 
 @app.route('/say', methods=['POST'])

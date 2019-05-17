@@ -77,6 +77,7 @@ def getServoPos(servo):
     else:
         return 0
 
+
 def changeServoPos(servo, action):
    global servoXpos
    global servoYpos
@@ -104,7 +105,7 @@ def changeServoPos(servo, action):
        servoYpos = pos
        setPinToPos(servoY, servoYpos) 
 
-   return str(pos)
+   return pos
 
 
 def say(msg):
