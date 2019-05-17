@@ -26,11 +26,13 @@
 		<section>
 			<h1>Camera:</h1>
 			<div class="camera">
-				<div class="cameraBtn" onclick="turnXleft();"><i class="fas fa-angle-left"></i></div>
 				<div class="feed">
 					<img src="{{ url_for('feed') }}"/>
 				</div>
-				<div class="cameraBtn" onclick="turnXright();"><i class="fas fa-angle-right"></i></div>
+				<div class="cameraBtn up" onclick="turnYleft();"><i class="fas fa-angle-up"></i></div>
+				<div class="cameraBtn down" onclick="turnYright();"><i class="fas fa-angle-down"></i></div>
+				<div class="cameraBtn left" onclick="turnXleft();"><i class="fas fa-angle-left"></i></div>
+				<div class="cameraBtn right" onclick="turnXright();"><i class="fas fa-angle-right"></i></div>
 			</div>
 			<p>Status: <span id="status">Idle</span></p>
 	  </section>
