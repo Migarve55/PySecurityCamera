@@ -1,12 +1,12 @@
 
 
 function load() {
-	$.get("/servo/servoX", function(response) {
+	$.get("/pos/servoX", function(response) {
     $("#x").html(response);
   }).fail(function() {
     setError();
   });
-  $.get("/servo/servoY", function(response) {
+  $.get("/pos/servoY", function(response) {
     $("#y").html(response);
   }).fail(function() {
     setError();
@@ -18,7 +18,7 @@ function setError() {
 }
 
 function turnXright() {
-  $.get("/servo/servoX/right", function(response) {
+  $.get("/move/servoX/right", function(response) {
     $("#x").html(response);
   }).fail(function() {
     setError();
@@ -26,7 +26,7 @@ function turnXright() {
 }
 
 function turnXleft() {
-  $.get("/servo/servoX/left", function(response) {
+  $.get("/move/servoX/left", function(response) {
     $("#x").html(response);
   }).fail(function() {
     setError();
@@ -34,7 +34,7 @@ function turnXleft() {
 }
 
 function turnYright() {
-  $.get("/servo/servoY/right", function(response) {
+  $.get("/move/servoY/right", function(response) {
     $("#y").html(response);
   }).fail(function() {
     setError();
@@ -42,7 +42,7 @@ function turnYright() {
 }
 
 function turnYleft() {
-  $.get("/servo/servoY/left", function(response) {
+  $.get("/move/servoY/left", function(response) {
     $("#y").html(response);
   }).fail(function() {
     setError();

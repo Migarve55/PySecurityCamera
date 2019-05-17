@@ -74,14 +74,14 @@ def gen(camera):
 
 # Control
 
-@app.route("/servo/<servo>")
+@app.route("/pos/<servo>")
 def getServoPos(servo):
     if not getLogged():
         abort(403)
     return piControl.getServoPos(servo)
 
 
-@app.route("/servo/<servo>/<action>")
+@app.route("/move/<servo>/<action>")
 def changeServoPos(servo, action):
     if not getLogged():
         abort(403)
