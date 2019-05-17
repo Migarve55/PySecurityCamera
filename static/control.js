@@ -1,45 +1,46 @@
 
+
 function load() {
 	var output = document.getElementById("x");
 	output.innerHTML = 90;
 }
 
-function makeHttpObject() {
-  try {return new XMLHttpRequest();}
-  catch (error) {}
-  try {return new ActiveXObject("Msxml2.XMLHTTP");}
-  catch (error) {}
-  try {return new ActiveXObject("Microsoft.XMLHTTP");}
-  catch (error) {}
+function turnXright() {
+  $.get("/servo/servoX/right", function(response) {
+    $("#x").html(response);
+  });
+}
 
-  throw new Error("Could not create HTTP request object.");
+function turnXleft() {
+  $.get("/servo/servoX/left", function(response) {
+    $("#x").html(response);
+  });
 }
 
 function turnYright() {
-  var request = makeHttpObject();
-  request.open("GET", "http://mgvhome.duckdns.org:56082/servo/servoY/right", true);
-  request.send();
-  var output = document.getElementById("x");
-  output.innerHTML = request.responseText;
+  $.get("/servo/servoY/right", function(response) {
+    $("#y").html(response);
+  });
 }
 
 function turnYleft() {
-  var request = makeHttpObject();
-  request.open("GET", "http://mgvhome.duckdns.org:56082/servo/servoY/left", true);
-  request.send();
-  var output = document.getElementById("x");
-  output.innerHTML = request.responseText;
+  $.get("/servo/servoY/left", function(response) {
+    $("#y").html(response);
+  });
 }
 
 function sendText() {
-    var toSay = document.getElementById("msg").value;
+  var toSay = $("#msg").val();
+  $("#msg").val("");
 	var data = { 'msg' : toSay };
 	$.ajax({
-        type: 'POST',
-        url: '/say',
+    type: 'POST',
+    url: '/say',
 		contentType: 'application/json;charset=UTF-8',
-        data: JSON.stringify(data)
-    }).done(function(response) {
-		document.getElementById("status").innerHTML = response;
-	});
+    data: JSON.stringify(data)
+  }).done(function(response) {
+    $("#status").html(response);
+	}).fail(function() {
+    $("#status").html('<span class="alert">Error</span>');
+  });
 }

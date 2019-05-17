@@ -26,21 +26,27 @@
 		<section>
 			<h1>Camera:</h1>
 			<div class="camera">
-				<div class="cameraBtn" onclick="turnYleft();"><i class="fas fa-angle-left"></i></div>
+				<div class="cameraBtn" onclick="turnXleft();"><i class="fas fa-angle-left"></i></div>
 				<div class="feed">
 					<img src="{{ url_for('feed') }}"/>
 				</div>
-				<div class="cameraBtn" onclick="turnYright();"><i class="fas fa-angle-right"></i></div>
+				<div class="cameraBtn" onclick="turnXright();"><i class="fas fa-angle-right"></i></div>
 			</div>
 			<p>Status: <span id="status">Idle</span></p>
 	  </section>
 	  <section>
 			<h1>Control:</h1>
-			<p>Degrees of Y axis: <span id="x"></span></p>
+			<p>Degrees of X axis: <span id="x"></span></p>
+			<p>Degrees of Y axis: <span id="y"></span></p>
 			<div class="control">
-				<span>Move the camera:</span> 
-				<button type="button" onclick="turnYleft();">Turn left</button>  
-				<button type="button" onclick="turnYright();">Turn right</button>
+				<span>Pan:</span> 
+				<button type="button" onclick="turnXleft();">Turn left</button>  
+				<button type="button" onclick="turnXright();">Turn right</button>
+			</div>
+			<div class="control">
+				<span>Tilt:</span> 
+				<button type="button" onclick="turnYleft();">Go up</button>  
+				<button type="button" onclick="turnYright();">Go down</button>
 			</div>
 	  </section>
 		<section>

@@ -1,10 +1,13 @@
 #!/usr/bin/env python
+import json
 from flask import Flask, render_template, session, Response, abort, url_for, redirect, request
 
 from camera_opencv import Camera
 
 # Raspberry Pi camera module (requires picamera package)
 # from camera_pi import Camera
+
+import piControl
 
 app = Flask(__name__)
 app.secret_key = b'T7fy2T"F4Q8zGHac9Y'
@@ -13,6 +16,11 @@ app.secret_key = b'T7fy2T"F4Q8zGHac9Y'
 
 user = "admin"
 password = "1234"
+
+with open('config.json') as configFile:
+    config = json.load(configFile)
+    user = config["security"]["username"]
+    password = config["security"]["username"]
 
 # Web controls
 
@@ -63,6 +71,20 @@ def gen(camera):
         yield (b'--frame\r\n'
                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
 
+
+# Control
+
+@app.route("/servo/<servo>/<action>")
+def changeServoPos(servo, action):
+    return piControl.changeServoPos(servo, action)
+
+@app.route('/say', methods=['POST'])
+def say():
+	msg = request.json['msg']
+	if msg != None:
+		piControl.say(msg)
+	else:
+		abort(400)
 
 # Auxiliar
 

@@ -96,3 +96,8 @@ section {
 	margin: 0.2em;
 	padding: 0.4em;
 }
+
+.alert {
+	font-weight: bold;
+	color: red;
+}
