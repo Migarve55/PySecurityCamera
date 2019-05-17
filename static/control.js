@@ -1,8 +1,16 @@
 
 
 function load() {
-	var output = document.getElementById("x");
-	output.innerHTML = 90;
+	$.get("/servo/servoX", function(response) {
+    $("#x").html(response);
+  }).fail(function() {
+    setError();
+  });
+  $.get("/servo/servoY", function(response) {
+    $("#y").html(response);
+  }).fail(function() {
+    setError();
+  });
 }
 
 function setError() {

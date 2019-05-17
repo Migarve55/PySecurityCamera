@@ -74,13 +74,24 @@ def gen(camera):
 
 # Control
 
+@app.route("/servo/<servo>")
+def getServoPos(servo):
+    if not getLogged():
+        abort(403)
+    return piControl.getServoPos(servo)
+
+
 @app.route("/servo/<servo>/<action>")
 def changeServoPos(servo, action):
+    if not getLogged():
+        abort(403)
     return piControl.changeServoPos(servo, action)
 
 
 @app.route('/say', methods=['POST'])
 def say():
+    if not getLogged():
+        abort(403)
     msg = request.json['msg']
     if msg != None:
         piControl.say(msg)

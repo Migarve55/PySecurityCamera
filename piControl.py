@@ -69,6 +69,14 @@ def setPinToPos(pin, pos):
     p.stop()
 
 
+def getServoPos(servo):
+    if servo == "servoX":
+       return servoXpos
+    elif servo == "servoY":
+       return servoYpos
+    else:
+        return 0
+
 def changeServoPos(servo, action):
    global servoXpos
    global servoYpos
