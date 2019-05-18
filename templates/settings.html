@@ -2,31 +2,55 @@
 <html lang="es">
 
 <head>
-  <title>Camera settings</title>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" type="text/css" media="screen" href="{{url_for('static', filename='style.css')}}">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
-    integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <title>Camera settings</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="{{url_for('static', filename='style.css')}}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="{{url_for('static', filename='settings.js')}}"></script>
 </head>
 
 <body>
-  <header>
-    <h1>Home security camera settings</h1>
-  </header>
-  <nav>
-    <ul>
-      <li><a href="/">Camera</a></li>
-      <li><a href="{{ url_for('logout') }}">Log out</a></li>
-    </ul>
-  </nav>
-  <main>
-    <section>
-      <h1>This is a placeholder</h1>
-    </section>
-  </main>
+    <header>
+        <h1>Home security camera settings</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="/">Camera</a></li>
+            <li><a href="{{ url_for('logout') }}">Log out</a></li>
+        </ul>
+    </nav>
+    <main>
+        <h2>Servos configuration:</h2>
+        <h3>Pan servo:</h3>
+        <div class="control">
+            <label for="stepX">Step:</label>
+            <input name="stepX" type="number" id="stepX" min="-180" max="180" value="{{ config['camera']['servo']['pan']['step'] }}">
+            <label for="mixX">Min:</label>
+            <input name="minX" type="number" id="minX" min="0" max="180" value="{{ config['camera']['servo']['pan']['min'] }}">
+            <label for="maxX">Max:</label>
+            <input name="maxX" type="number" id="maxX" min="0" max="180" value="{{ config['camera']['servo']['pan']['max'] }}">
+        </div>
+        <h3>Tilt servo:</h3>
+        <div class="control">
+            <label for="stepY">Step:</label>
+            <input name="stepY" type="number" id="stepY" min="-180" max="180" value="{{ config['camera']['servo']['tilt']['step'] }}">
+            <label for="mixY">Min:</label>
+            <input name="minY" type="number" id="minY" min="0" max="180" value="{{ config['camera']['servo']['tilt']['min'] }}">
+            <label for="maxY">Max:</label>
+            <input name="maxY" type="number" id="maxY" min="0" max="180" value="{{ config['camera']['servo']['tilt']['max'] }}">
+        </div>
+        <h2>Speech configuration:</h2>
+        <div class="control">
+            <label for="voice">Voice:</label>
+            <input name="voice" type="text" id="voice" value="{{ config['camera']['speech']['voice'] }}">
+            <label for="rate">Rate:</label>
+            <input name="rate" type="number" id="rate" min="0" max="1000" value="{{ config['camera']['speech']['rate'] }}">
+        </div>
+        <button type="button" onclick="saveConfig();">Save settings</button>
+    </main>
 </body>
 
 </html>

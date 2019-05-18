@@ -32,11 +32,18 @@ def index():
     return render_template('index.html')
 
 
-@app.route('/settings')
+@app.route('/settings', methods=['GET', 'POST'])
 def settings():
     if not getLogged():
         return redirect(url_for('login'))
-    return render_template('settings.html')
+    if request.method == "GET":
+        config = piControl.getConfig()
+        return render_template('settings.html', **config)
+    elif request.method == "POST":
+        newConfig = request.json
+        piControl.saveNewConfig(newConfig)
+        return redirect(url_for('settings'))
+
 
 # Login
 
@@ -71,8 +78,8 @@ def gen(camera):
         yield (b'--frame\r\n'
                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
 
-
 # Control
+
 
 @app.route("/pos/<servo>")
 def getServoPos(servo):
@@ -101,11 +108,13 @@ def say():
 
 # Auxiliar
 
+
 def getLogged():
     try:
         return session['LOGGED']
     except:
         return False
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', threaded=True)

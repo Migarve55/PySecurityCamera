@@ -8,6 +8,8 @@ GPIO.setwarnings(False)
 
 engine = pyttsx.init()
 
+config = None
+
 #Speech
 engine.setProperty('voice', 'english')
 engine.setProperty('rate', 120)
@@ -28,15 +30,32 @@ stepY = 15
 #Config file
 with open('config.json') as configFile:
     config = json.load(configFile)
-    #Speech
-    engine.setProperty('voice', config["camera"]["speech"]["voice"])
-    engine.setProperty('rate',  config["camera"]["speech"]["rate"])
+    saveConfig(config)
+
+#Servo declaring
+GPIO.setup(servoX, GPIO.OUT)
+GPIO.setup(servoY, GPIO.OUT)
+
+def getConfig():
+    return config
+
+
+def saveConfig(config):
+    global servoX, servoY, servoXpos, servoYpos
     #Servo pins
     servoX = config["camera"]["servo"]["pan"]["pin"]
     servoY = config["camera"]["servo"]["tilt"]["pin"]
     #Servo positions
     servoXpos = config["camera"]["servo"]["pan"]["pos"]
     servoYpos = config["camera"]["servo"]["tilt"]["pos"]
+    
+    saveNewConfig(config)
+
+def saveNewConfig(config):
+    global minX, minY, maxX, maxY, stepX, stepY
+    #Speech
+    engine.setProperty('voice', config["camera"]["speech"]["voice"])
+    engine.setProperty('rate',  config["camera"]["speech"]["rate"])
     #Servos stop
     minX = config["camera"]["servo"]["pan"]["min"]
     maxX = config["camera"]["servo"]["pan"]["max"]
@@ -45,11 +64,6 @@ with open('config.json') as configFile:
     maxY = config["camera"]["servo"]["tilt"]["max"]
     stepY = config["camera"]["servo"]["tilt"]["step"]
 
-#Servo declaring
-GPIO.setup(servoX, GPIO.OUT)
-GPIO.setup(servoY, GPIO.OUT)
-
-   
 def constrain(var, min, max):
 	if var < min:
 		var = min
