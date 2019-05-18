@@ -27,14 +27,6 @@ minY = 45
 maxY = 135
 stepY = 15
 
-#Config file
-with open('config.json') as configFile:
-    config = json.load(configFile)
-    saveConfig(config)
-
-#Servo declaring
-GPIO.setup(servoX, GPIO.OUT)
-GPIO.setup(servoY, GPIO.OUT)
 
 def getConfig():
     return config
@@ -128,3 +120,13 @@ def say(msg):
         engine.runAndWait()
     except:
         print("Could not t2s")
+
+
+#Config file
+with open('config.json') as configFile:
+    config = json.load(configFile)
+    saveConfig(config)
+
+#Servo declaring
+GPIO.setup(servoX, GPIO.OUT)
+GPIO.setup(servoY, GPIO.OUT)

@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-import json
+import json, datetime
 from flask import Flask, render_template, session, Response, abort, url_for, redirect, request
 
 from camera_opencv import Camera
@@ -77,6 +77,16 @@ def gen(camera):
         frame = camera.get_frame()
         yield (b'--frame\r\n'
                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
+
+
+@app.route('/save')
+def save():
+    if not getLogged():
+        abort(403)
+    filename = "screenshot_" + datetime.datetime.now().strftime("%Y-%m-%d-%H:%M:%S")
+    with open(filename, "wb") as f:
+        frame = Camera().get_frame()
+        f.write(frame)
 
 # Control
 
