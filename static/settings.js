@@ -22,6 +22,7 @@ function saveConfig() {
     $.ajax({
         type: "POST",
         url: "/settings",
+        contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function(msg) {
             console.log("saved: " + msg);

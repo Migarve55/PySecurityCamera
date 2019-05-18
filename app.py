@@ -42,7 +42,7 @@ def settings():
     if request.method == "GET":
         return render_template('settings.html', con=piControl.getConfig())
     elif request.method == "POST":
-        newConfig = request.json
+        newConfig = request.get_json()
         if newConfig == None:
             abort(400)
         print(newConfig)
