@@ -27,27 +27,27 @@
         <h3>Pan servo:</h3>
         <div class="control">
             <label for="stepX">Step:</label>
-            <input name="stepX" type="number" id="stepX" min="-180" max="180" value="{{ config['camera']['servo']['pan']['step'] }}">
+            <input name="stepX" type="number" id="stepX" min="-180" max="180" value="{{ con['camera']['servo']['pan']['step'] }}">
             <label for="mixX">Min:</label>
-            <input name="minX" type="number" id="minX" min="0" max="180" value="{{ config['camera']['servo']['pan']['min'] }}">
+            <input name="minX" type="number" id="minX" min="0" max="180" value="{{ con['camera']['servo']['pan']['min'] }}">
             <label for="maxX">Max:</label>
-            <input name="maxX" type="number" id="maxX" min="0" max="180" value="{{ config['camera']['servo']['pan']['max'] }}">
+            <input name="maxX" type="number" id="maxX" min="0" max="180" value="{{ con['camera']['servo']['pan']['max'] }}">
         </div>
         <h3>Tilt servo:</h3>
         <div class="control">
             <label for="stepY">Step:</label>
-            <input name="stepY" type="number" id="stepY" min="-180" max="180" value="{{ config['camera']['servo']['tilt']['step'] }}">
+            <input name="stepY" type="number" id="stepY" min="-180" max="180" value="{{ con['camera']['servo']['tilt']['step'] }}">
             <label for="mixY">Min:</label>
-            <input name="minY" type="number" id="minY" min="0" max="180" value="{{ config['camera']['servo']['tilt']['min'] }}">
+            <input name="minY" type="number" id="minY" min="0" max="180" value="{{ con['camera']['servo']['tilt']['min'] }}">
             <label for="maxY">Max:</label>
-            <input name="maxY" type="number" id="maxY" min="0" max="180" value="{{ config['camera']['servo']['tilt']['max'] }}">
+            <input name="maxY" type="number" id="maxY" min="0" max="180" value="{{ con['camera']['servo']['tilt']['max'] }}">
         </div>
         <h2>Speech configuration:</h2>
         <div class="control">
             <label for="voice">Voice:</label>
-            <input name="voice" type="text" id="voice" value="{{ config['camera']['speech']['voice'] }}">
+            <input name="voice" type="text" id="voice" value="{{ con['camera']['speech']['voice'] }}">
             <label for="rate">Rate:</label>
-            <input name="rate" type="number" id="rate" min="0" max="1000" value="{{ config['camera']['speech']['rate'] }}">
+            <input name="rate" type="number" id="rate" min="0" max="1000" value="{{ con['camera']['speech']['rate'] }}">
         </div>
         <button type="button" onclick="saveConfig();">Save settings</button>
     </main>

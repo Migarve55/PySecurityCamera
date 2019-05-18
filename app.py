@@ -14,11 +14,14 @@ app.secret_key = b'T7fy2T"F4Q8zGHac9Y'
 
 # Settings
 
+screenshotFolder = "screenshots/"
+
 user = "admin"
 password = "1234"
 
 with open('config.json') as configFile:
     config = json.load(configFile)
+    screenshotFolder = config["screenshots"]["folder"]
     user = config["security"]["username"]
     password = config["security"]["password"]
 
@@ -37,8 +40,8 @@ def settings():
     if not getLogged():
         return redirect(url_for('login'))
     if request.method == "GET":
-        config = piControl.getConfig()
-        return render_template('settings.html', **config)
+        con = piControl.getConfig()
+        return render_template('settings.html', **con)
     elif request.method == "POST":
         newConfig = request.json
         piControl.saveNewConfig(newConfig)
@@ -83,10 +86,11 @@ def gen(camera):
 def save():
     if not getLogged():
         abort(403)
-    filename = "screenshot_" + datetime.datetime.now().strftime("%Y-%m-%d-%H:%M:%S")
-    with open(filename, "wb") as f:
+    filename = "screenshot_%s.jpg" % datetime.datetime.now().strftime("%Y-%m-%d-%H:%M:%S")
+    with open(screenshotFolder + filename, "wb") as f:
         frame = Camera().get_frame()
         f.write(frame)
+    return "ok"
 
 # Control
 

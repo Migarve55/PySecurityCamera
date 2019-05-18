@@ -27,14 +27,14 @@ Here is an explanation of the config file:
     "camera": {
         "servo": {
             "pan": {
-                "pin": 20,   // GPIO servo pin
+                "pin": 20,  // GPIO servo pin
                 "pos": 90,  // Starting position
                 "step": 15, // Step
                 "min": 45,  // Min pos
                 "max": 135  // Max pos
             },
             "tilt": {
-                "pin": 21,   // GPIO servo pin
+                "pin": 21,  // GPIO servo pin
                 "pos": 90,  // Starting position
                 "step": 15, // Step
                 "min": 45,  // Min pos
@@ -44,6 +44,9 @@ Here is an explanation of the config file:
         "speech": {
             "voice": "english", // Language
             "rate": 120         // Speed
+        },
+        "screenshots": {
+            "folder": "screenshots" // Where to save the screenshots
         }
     }
   }
