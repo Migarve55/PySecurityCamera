@@ -33,8 +33,10 @@
                 <div class="cameraBtn left" onclick="turnXleft();"><i class="fas fa-angle-left"></i></div>
                 <div class="cameraBtn right" onclick="turnXright();"><i class="fas fa-angle-right"></i></div>
             </div>
-            <p>Status: <span id="status">Idle</span></p>
-            <button id="saveBtn">Save screenshot</button>
+            <div class="control">
+                <p>Status: <span id="status">Idle</span></p>
+                <button id="saveBtn" onclick="saveScreenshot();">Save screenshot</button>
+            </div>
         </section>
         <section>
             <h1>Control:</h1>

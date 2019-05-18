@@ -46,7 +46,7 @@ Here is an explanation of the config file:
             "rate": 120         // Speed
         },
         "screenshots": {
-            "folder": "screenshots" // Where to save the screenshots
+            "folder": "screenshots/" // Where to save the screenshots (make sure the folder exists)
         }
     }
   }
@@ -65,8 +65,5 @@ Here is an explanation of the config file:
   - Pan/Tilt servomotors functionality (Only for RaspberryPi)
   - Text to speech comunication
   - Configuration file
-
-## Future features
-
   - Change the configuration on the fly
   - Screenshot saving

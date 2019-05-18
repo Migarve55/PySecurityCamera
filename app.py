@@ -40,8 +40,7 @@ def settings():
     if not getLogged():
         return redirect(url_for('login'))
     if request.method == "GET":
-        con = piControl.getConfig()
-        return render_template('settings.html', **con)
+        return render_template('settings.html', con=piControl.getConfig())
     elif request.method == "POST":
         newConfig = request.json
         piControl.saveNewConfig(newConfig)

@@ -55,9 +55,6 @@ function saveScreenshot() {
 }
 
 function load() {
-    $("#saveBtn").click(function() {
-        saveScreenshot();
-    });
     $.get("/pos/servoX", function(response) {
         $("#x").html(response);
     }).fail(function() {
