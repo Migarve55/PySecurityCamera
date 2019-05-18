@@ -104,7 +104,7 @@ def checkFiles():
     files = sorted(os.listdir(screenshotFolder), key=os.path.getctime)
     if (len(files) > maxFiles):
         oldest = files[0]
-        os.remove(oldest)
+        os.remove(screenshotFolder + oldest)
 
 
 # Control
