@@ -19,6 +19,8 @@ function saveConfig() {
             }
         }
     };
+    $.post("/settings", newConfig);
+    return;
     $.ajax({
         type: "POST",
         url: "/settings",
