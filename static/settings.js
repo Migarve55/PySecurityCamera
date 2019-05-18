@@ -19,11 +19,17 @@ function saveConfig() {
             }
         }
     };
-    $.post("/settings", newConfig)
-        .done(function() {
-            alert("Settigns saved");
-        })
-        .fail(function() {
-            alert("Could not save settings");
-        });
+    $.ajax({
+        type: "POST",
+        url: "/settings",
+        dataType: "json",
+        success: function(msg) {
+            console.log("saved: " + msg);
+        },
+        fail: function() {
+            alert("Could not save settings!!!");
+        },
+        data: newConfig
+    });
+
 }

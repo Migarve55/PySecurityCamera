@@ -43,6 +43,9 @@ def settings():
         return render_template('settings.html', con=piControl.getConfig())
     elif request.method == "POST":
         newConfig = request.json
+        if newConfig == None:
+            abort(400)
+        print(newConfig)
         piControl.saveNewConfig(newConfig)
         return redirect(url_for('settings'))
 
