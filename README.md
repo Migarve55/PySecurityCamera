@@ -46,7 +46,8 @@ Here is an explanation of the config file:
             "rate": 120         // Speed
         },
         "screenshots": {
-            "folder": "screenshots/" // Where to save the screenshots (make sure the folder exists)
+            "folder": "screenshots/", // Where to save the screenshots (make sure the folder exists)
+            "max": 100                // Max number of saved files
         }
     }
   }

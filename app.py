@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 import json, datetime
+import os
 from flask import Flask, render_template, session, Response, abort, url_for, redirect, request
 
 from camera_opencv import Camera
@@ -15,6 +16,7 @@ app.secret_key = b'T7fy2T"F4Q8zGHac9Y'
 # Settings
 
 screenshotFolder = "screenshots/"
+maxFiles = 100
 
 user = "admin"
 password = "1234"
@@ -22,6 +24,7 @@ password = "1234"
 with open('config.json') as configFile:
     config = json.load(configFile)
     screenshotFolder = config["camera"]["screenshots"]["folder"]
+    maxFiles = config["camera"]["screenshots"]["maxFiles"]
     user = config["security"]["username"]
     password = config["security"]["password"]
 
@@ -42,7 +45,7 @@ def settings():
     if request.method == "GET":
         return render_template('settings.html', con=piControl.getConfig())
     elif request.method == "POST":
-        newConfig = request.get_json()
+        newConfig = request.get_json(force=True)
         if newConfig == None:
             abort(400)
         print(newConfig)
@@ -66,6 +69,7 @@ def login():
 def logout():
     session['LOGGED'] = False
     return redirect(url_for('login'))
+
 
 # Camera
 
@@ -92,7 +96,16 @@ def save():
     with open(screenshotFolder + filename, "wb") as f:
         frame = Camera().get_frame()
         f.write(frame)
+        checkFiles()
     return "ok"
+
+
+def checkFiles():
+    files = sorted(os.listdir(screenshotFolder), key=os.path.getctime)
+    if (len(files) > maxFiles):
+        oldest = files[0]
+        os.remove(oldest)
+
 
 # Control
 
