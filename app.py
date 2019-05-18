@@ -21,7 +21,7 @@ password = "1234"
 
 with open('config.json') as configFile:
     config = json.load(configFile)
-    screenshotFolder = config["screenshots"]["folder"]
+    screenshotFolder = config["camera"]["screenshots"]["folder"]
     user = config["security"]["username"]
     password = config["security"]["password"]
 
