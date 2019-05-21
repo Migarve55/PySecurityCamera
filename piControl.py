@@ -41,20 +41,20 @@ def saveConfig(config):
     servoXpos = config["camera"]["servo"]["pan"]["pos"]
     servoYpos = config["camera"]["servo"]["tilt"]["pos"]
     
-    saveNewConfig(config)
+    saveNewConfig(config["camera"])
 
 def saveNewConfig(config):
     global minX, minY, maxX, maxY, stepX, stepY
     #Speech
-    engine.setProperty('voice', config["camera"]["speech"]["voice"])
-    engine.setProperty('rate',  config["camera"]["speech"]["rate"])
+    engine.setProperty('voice', config["speech"]["voice"])
+    engine.setProperty('rate',  config["speech"]["rate"])
     #Servos stop
-    minX = config["camera"]["servo"]["pan"]["min"]
-    maxX = config["camera"]["servo"]["pan"]["max"]
-    stepX = config["camera"]["servo"]["pan"]["step"]
-    minY = config["camera"]["servo"]["tilt"]["min"]
-    maxY = config["camera"]["servo"]["tilt"]["max"]
-    stepY = config["camera"]["servo"]["tilt"]["step"]
+    minX = config["servo"]["pan"]["min"]
+    maxX = config["servo"]["pan"]["max"]
+    stepX = config["servo"]["pan"]["step"]
+    minY = config["servo"]["tilt"]["min"]
+    maxY = config["servo"]["tilt"]["max"]
+    stepY = config["servo"]["tilt"]["step"]
 
 def constrain(var, min, max):
 	if var < min:

@@ -1,5 +1,6 @@
 #!/usr/bin/env python
-import json, datetime
+import json
+import datetime
 import os
 from flask import Flask, render_template, session, Response, abort, url_for, redirect, request
 
@@ -43,12 +44,11 @@ def settings():
     if not getLogged():
         return redirect(url_for('login'))
     if request.method == "GET":
-        return render_template('settings.html', con=piControl.getConfig())
+        return render_template('settings.html', con=piControl.getConfig()["camera"])
     elif request.method == "POST":
-        newConfig = request.get_json(force=True)
+        newConfig = request.json
         if newConfig == None:
             abort(400)
-        print(newConfig)
         piControl.saveNewConfig(newConfig)
         return redirect(url_for('settings'))
 
