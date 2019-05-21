@@ -1,5 +1,6 @@
 import time
 import threading
+import cv2
 try:
     from greenlet import getcurrent as get_ident
 except ImportError:
@@ -51,20 +52,31 @@ class CameraEvent(object):
         self.events[get_ident()][0].clear()
 
 
-class BaseCamera(object):
-    thread = None  # background thread that reads frames from camera
-    frame = None  # current frame is stored here by background thread
-    last_access = 0  # time of last client access to the camera
+class Camera(object):
+    thread = None  
+    frame = None  
+    last_access = 0  
     event = CameraEvent()
+    # Configuration
+    video_source = 0
+    sleepTime = 10
+    centinelActivated = False
+
+    @staticmethod
+    def set_video_source(source):
+        Camera.video_source = source
+
+    def setCentinelMode(self, mode):
+        Camera.centinelActivated = mode
 
     def __init__(self):
         """Start the background camera thread if it isn't running yet."""
-        if BaseCamera.thread is None:
-            BaseCamera.last_access = time.time()
+        if Camera.thread is None:
+            Camera.last_access = time.time()
 
             # start background frame thread
-            BaseCamera.thread = threading.Thread(target=self._thread)
-            BaseCamera.thread.start()
+            Camera.thread = threading.Thread(target=self._thread)
+            Camera.thread.start()
 
             # wait until frames are available
             while self.get_frame() is None:
@@ -72,18 +84,25 @@ class BaseCamera(object):
 
     def get_frame(self):
         """Return the current camera frame."""
-        BaseCamera.last_access = time.time()
+        Camera.last_access = time.time()
 
         # wait for a signal from the camera thread
-        BaseCamera.event.wait()
-        BaseCamera.event.clear()
+        Camera.event.wait()
+        Camera.event.clear()
 
-        return BaseCamera.frame
+        return Camera.frame
 
     @staticmethod
     def frames():
-        """"Generator that returns frames from the camera."""
-        raise RuntimeError('Must be implemented by subclasses.')
+        camera = cv2.VideoCapture(Camera.video_source)
+        if not camera.isOpened():
+            raise RuntimeError('Could not start camera.')
+
+        while True:
+            # read current frame
+            _, img = camera.read()
+            # encode as a jpeg image and return it
+            yield cv2.imencode('.jpg', img)[1].tobytes()
 
     @classmethod
     def _thread(cls):
@@ -91,14 +110,13 @@ class BaseCamera(object):
         print('Starting camera thread.')
         frames_iterator = cls.frames()
         for frame in frames_iterator:
-            BaseCamera.frame = frame
-            BaseCamera.event.set()  # send signal to clients
+            Camera.frame = frame
+            Camera.event.set()  # send signal to clients
             time.sleep(0)
 
-            # if there hasn't been any clients asking for frames in
-            # the last 10 seconds then stop the thread
-            if time.time() - BaseCamera.last_access > 10:
-                frames_iterator.close()
-                print('Stopping camera thread due to inactivity.')
-                break
-        BaseCamera.thread = None
+            if not Camera.centinelActivated:
+                if time.time() - Camera.last_access > Camera.sleepTime:
+                    frames_iterator.close()
+                    print('Stopping camera thread due to inactivity.')
+                    break
+        Camera.thread = None

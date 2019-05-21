@@ -51,7 +51,24 @@ function sendText() {
 }
 
 function saveScreenshot() {
-    $.get("/save");
+    $.get("/save")
+        .done(function(response) {
+            $("#status").html(response);
+        }).fail(function() {
+            setError();
+        });
+}
+
+function toggleCentinelMode() {
+    var btn = $(this);
+    var isActivated = false;
+    $.get("/centinel/" + isActivated)
+        .done(function(response) {
+            $("#status").html(response);
+        }).fail(function() {
+            setError();
+        });
+    btn.html(isActivated ? "Deactivate" : "Activate");
 }
 
 function load() {

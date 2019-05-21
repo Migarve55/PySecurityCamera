@@ -4,7 +4,7 @@ import datetime
 import os
 from flask import Flask, render_template, session, Response, abort, url_for, redirect, request
 
-from camera_opencv import Camera
+from camera import Camera
 
 # Raspberry Pi camera module (requires picamera package)
 # from camera_pi import Camera
@@ -31,6 +31,7 @@ with open('config.json') as configFile:
 
 # Web controls
 
+camera = Camera()
 
 @app.route('/')
 def index():
@@ -78,7 +79,7 @@ def logout():
 def feed():
     if not getLogged():
         abort(403)
-    return Response(gen(Camera()), mimetype='multipart/x-mixed-replace; boundary=frame')
+    return Response(gen(camera), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 
 def gen(camera):
@@ -94,9 +95,15 @@ def save():
         abort(403)
     filename = "screenshot_%s.jpg" % datetime.datetime.now().strftime("%Y-%m-%d-%H:%M:%S")
     with open(screenshotFolder + filename, "wb") as f:
-        frame = Camera().get_frame()
+        frame = camera.get_frame()
         f.write(frame)
         checkFiles()
+    return "ok"
+
+
+@app.route('/centinel/<boolean:mode>')
+def setSentinel(mode):
+    camera.setCentinelMode(mode)
     return "ok"
 
 
