@@ -103,7 +103,7 @@ def save():
 
 @app.route('/centinel/<boolean:mode>')
 def setSentinel(mode):
-    camera.setCentinelMode(mode)
+    
     return "ok"
 
 
